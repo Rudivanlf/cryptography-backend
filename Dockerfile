@@ -12,6 +12,9 @@ COPY mvnw pom.xml ./
 # Copia o código fonte do projeto
 COPY src ./src
 
+# Dá permissão de execução para o Maven Wrapper
+RUN chmod +x ./mvnw
+
 # Executa o comando para compilar o projeto e gerar o arquivo .jar
 # -DskipTests pula os testes para acelerar o build no deploy
 RUN ./mvnw clean package -DskipTests
