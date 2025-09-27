@@ -19,7 +19,6 @@ RUN chmod +x ./mvnw
 # -DskipTests pula os testes para acelerar o build no deploy
 RUN ./mvnw clean package -DskipTests
 
-
 # Estágio 2: Imagem Final de Execução
 # Usamos uma imagem JRE 21, que é menor e mais segura
 FROM eclipse-temurin:21-jre-jammy
@@ -29,7 +28,7 @@ WORKDIR /app
 
 # Copia o arquivo .jar gerado no estágio de build para a imagem final
 # Certifique-se que o nome do .jar está correto
-COPY --from=builder /app/target/grupo_estudos-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=builder /app/target/cryptography-0.0.1-SNAPSHOT.jar ./app.jar
 
 # Expõe a porta que o Spring Boot usa. Render usa a porta 10000.
 # O Spring Boot vai detectar a variável de ambiente PORT automaticamente.
