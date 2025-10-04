@@ -4,6 +4,7 @@ import com.project.cryptography.DTO.UserRequestDTO;
 import com.project.cryptography.Model.User;
 import com.project.cryptography.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,11 +12,13 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
     private final UserRepository repository;
+    private final PasswordEncoder encoder;
 
-    public UserService(UserRepository repository) {
+    @Autowired
+    public UserService(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
+        this.encoder = encoder;
     }
 
     public void postUser (UserRequestDTO userRequest) {
@@ -23,7 +26,8 @@ public class UserService {
 
         user.setNome(userRequest.getNome());
         user.setUsername(userRequest.getUsername());
-        user.setSenha(userRequest.getSenha());
+        String encodedPassword = encoder.encode(userRequest.getSenha());
+        user.setSenha(encodedPassword);
 
         repository.save(user);
     }
@@ -56,7 +60,7 @@ public class UserService {
     public User login(String username, String senha) {
         User user = repository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
-        if (user.getSenha().equals(senha))
+        if (encoder.matches(senha, user.getSenha()))
             return user;
         else
             throw new RuntimeException("Senha inválida.");
