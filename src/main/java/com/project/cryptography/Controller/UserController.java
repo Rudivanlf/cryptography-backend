@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -48,14 +49,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDetailResponseDTO>
-    login(@RequestBody LoginRequestDTO loginRequest) {
+    public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         try {
             User user = service.login(loginRequest.getUsername(),
                     loginRequest.getSenha());
             return ResponseEntity.ok(new UserDetailResponseDTO(user));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(401).build();
+            // Retorna a mensagem no corpo da resposta
+            return ResponseEntity.status(401).body(Map.of("message", e.getMessage()));
         }
     }
 }

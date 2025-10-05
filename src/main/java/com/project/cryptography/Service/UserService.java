@@ -22,14 +22,14 @@ public class UserService {
     }
 
     public void postUser (UserRequestDTO userRequest) {
-        User user = new User();
+        if (repository.findByUsername(userRequest.getUsername()).isPresent()) {
+            throw new RuntimeException("Username '" + userRequest.getUsername() + "' já está em uso.");
+        }
 
-        user.setNome(userRequest.getNome());
-        user.setUsername(userRequest.getUsername());
-        String encodedPassword = encoder.encode(userRequest.getSenha());
-        user.setSenha(encodedPassword);
-
-        repository.save(user);
+        User newUser = new User();
+        newUser.setUsername(userRequest.getUsername());
+        newUser.setSenha(encoder.encode(userRequest.getSenha()));
+        repository.save(newUser);
     }
 
     public User putUser(Long id, User user) {
