@@ -26,7 +26,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Desabilita CSRF para APIs stateless
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Não cria sessão
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/users/**").permitAll() // Permite acesso a todos os endpoints dos users
+                        .requestMatchers("/**").permitAll() // Permite acesso a todos os endpoints dos users
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
                         .anyRequest().authenticated() // Exige autenticação para qualquer outra requisição
                 );
