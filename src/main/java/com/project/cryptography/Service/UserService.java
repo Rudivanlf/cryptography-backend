@@ -27,6 +27,7 @@ public class UserService {
         }
 
         User newUser = new User();
+        newUser.setName(userRequest.getName());
         newUser.setUsername(userRequest.getUsername());
         newUser.setPassword(encoder.encode(userRequest.getPassword()));
         repository.save(newUser);
@@ -57,10 +58,10 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User login(String username, String senha) {
+    public User login(String username, String password) {
         User user = repository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
-        if (encoder.matches(senha, user.getPassword()))
+        if (encoder.matches(password, user.getPassword()))
             return user;
         else
             throw new RuntimeException("Senha inválida.");
