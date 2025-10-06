@@ -10,13 +10,13 @@ public class User {
     private Long id;
 
     @Column(nullable = false, length = 150)
-    private String nome;
+    private String name;
 
     @Column(nullable = false, unique = true, length = 100)
     private String username;
 
     @Column(nullable = false, length = 255)
-    private String senha;
+    private String password;
 
     public Long getId() {
         return id;
@@ -26,12 +26,12 @@ public class User {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
     public String getUsername() {
@@ -42,11 +42,11 @@ public class User {
         this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String senha) {
+        this.password = senha;
     }
 }

@@ -5,15 +5,15 @@ import com.project.cryptography.Model.User;
 public class UserDetailResponseDTO {
 
     private Long id;
-    private String nome;
+    private String name;
     private String username;
-    private String senha;
+    private String password;
 
     public UserDetailResponseDTO(User user) {
         this.id = user.getId();
-        this.nome = user.getNome();
+        this.name = user.getName();
         this.username = user.getUsername();
-        this.senha = user.getSenha();
+        this.password = user.getPassword();
     }
 
     public Long getId() {
@@ -24,12 +24,12 @@ public class UserDetailResponseDTO {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
     public String getUsername() {
@@ -40,11 +40,11 @@ public class UserDetailResponseDTO {
         this.username = email;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String senha) {
+        this.password = senha;
     }
 }

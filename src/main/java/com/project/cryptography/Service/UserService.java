@@ -28,16 +28,16 @@ public class UserService {
 
         User newUser = new User();
         newUser.setUsername(userRequest.getUsername());
-        newUser.setSenha(encoder.encode(userRequest.getSenha()));
+        newUser.setPassword(encoder.encode(userRequest.getPassword()));
         repository.save(newUser);
     }
 
     public User putUser(Long id, User user) {
         return repository.findById(id)
                 .map(userExist -> {
-                    userExist.setNome(user.getNome());
+                    userExist.setName(user.getName());
                     userExist.setUsername(user.getUsername());
-                    userExist.setSenha(user.getSenha());
+                    userExist.setPassword(user.getPassword());
                     return repository.save(userExist);
                 })
                 .orElse(null);
@@ -60,7 +60,7 @@ public class UserService {
     public User login(String username, String senha) {
         User user = repository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
-        if (encoder.matches(senha, user.getSenha()))
+        if (encoder.matches(senha, user.getPassword()))
             return user;
         else
             throw new RuntimeException("Senha inválida.");

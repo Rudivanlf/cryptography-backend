@@ -2,16 +2,16 @@ package com.project.cryptography.DTO;
 
 public class UserRequestDTO {
 
-    private String nome;
+    private String name;
     private String username;
-    private String senha;
+    private String password;
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String nome) {
+        this.name = nome;
     }
 
     public String getUsername() {
@@ -22,11 +22,11 @@ public class UserRequestDTO {
         this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String senha) {
+        this.password = senha;
     }
 }
