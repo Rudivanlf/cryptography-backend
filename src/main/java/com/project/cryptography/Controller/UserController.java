@@ -21,8 +21,13 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public void postUser(@RequestBody UserRequestDTO userRequest) {
-        service.postUser(userRequest);
+    public ResponseEntity<Map<String, String>> postUser(@RequestBody UserRequestDTO userRequest) {
+        try {
+            service.postUser(userRequest);
+            return ResponseEntity.status(201).body(Map.of("message", "Usuário criado com sucesso!"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(409).body(Map.of("message", e.getMessage()));
+        }
     }
 
     @PutMapping("/{id}")
@@ -52,7 +57,7 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
         try {
             User user = service.login(loginRequest.getUsername(),
-                    loginRequest.getSenha());
+                    loginRequest.getPassword());
             return ResponseEntity.ok(new UserDetailResponseDTO(user));
         } catch (RuntimeException e) {
             // Retorna a mensagem no corpo da resposta

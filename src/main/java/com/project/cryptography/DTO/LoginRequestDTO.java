@@ -3,7 +3,7 @@ package com.project.cryptography.DTO;
 public class LoginRequestDTO {
 
     private String username;
-    private String senha;
+    private String password;
 
     public String getUsername() {
         return username;
@@ -13,11 +13,11 @@ public class LoginRequestDTO {
         this.username = username;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String senha) {
+        this.password = senha;
     }
 }
