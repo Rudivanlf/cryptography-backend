@@ -46,6 +46,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/users/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/users/byUsername/**").permitAll()
                         .requestMatchers(SWAGGER_WHITELIST).permitAll()
 
                         // 4. Exige autenticação para o resto

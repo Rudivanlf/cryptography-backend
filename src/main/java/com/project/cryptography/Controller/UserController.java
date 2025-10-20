@@ -35,10 +35,14 @@ public class UserController {
         return service.putUser(id, user);
     }
 
-    @GetMapping("/{id}")
-    public UserDetailResponseDTO getUser(@PathVariable Long id) {
-        User user = service.getUser(id);
-        return new UserDetailResponseDTO(user);
+    @GetMapping("/byUsername/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
+        try {
+            User user = service.getUserByUsername(username);
+            return ResponseEntity.ok(new UserDetailResponseDTO(user));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(Map.of("message", e.getMessage()));
+        }
     }
 
     @GetMapping("/all")

@@ -54,6 +54,11 @@ public class UserService {
         return repository.findAll();
     }
 
+    public User getUserByUsername(String username) {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Usuário '" + username + "' não encontrado."));
+    }
+
     public void deleteUser(Long id) {
         repository.deleteById(id);
     }
